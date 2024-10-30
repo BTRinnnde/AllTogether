@@ -154,6 +154,13 @@ body {
 .title-container {
     text-align: center;
     width: 100%;
+    position: relative;
+    padding: 0 1rem;
+    margin-top: -2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .artist-name {
@@ -161,12 +168,79 @@ body {
     font-weight: bold;
     color: var(--primary-text);
     letter-spacing: 2px;
-    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    position: relative;
+    z-index: 1;
+}
+
+.artist-name:before {
+    content: "▶ PLAY MUSIC";
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1DB954;
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+}
+
+.artist-name:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--primary-text);
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    animation: pulseOutline 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes pulseOutline {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.artist-name:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--shadow-color);
+    background: #f8f8f8;
+}
+
+.artist-name:hover {
+    opacity: 0.7;
 }
 
 .tagline {
     font-size: 1.2rem;
+    color: var(--primary-text);
     opacity: 0.8;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-10px);
 }
 
 /* Subpage Content */
@@ -203,7 +277,15 @@ body {
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .artist-name {
-        font-size: 3.5rem;
+        font-size: 3rem;
+        padding: 1.5rem 2rem;
+        width: 90%;
+        max-width: 400px;
+    }
+    
+    .artist-name:before {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
     }
     
     .header-title {
@@ -246,12 +328,25 @@ body {
         background: transparent;
         box-shadow: none;
     }
+
+    .tagline {
+        font-size: 1.1rem;
+        padding: 0.4rem 1.2rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
     .artist-name {
-        font-size: 2.5rem;
-        padding: 0 1rem;
+        font-size: 2.2rem;
+        padding: 1.2rem 1.5rem;
+        width: 95%;
+        letter-spacing: 1px;
+    }
+    
+    .artist-name:before {
+        font-size: 0.9rem;
+        margin-bottom: 0.6rem;
+        letter-spacing: 2px;
     }
 
     .burger-menu {
@@ -274,6 +369,38 @@ body {
     .menu-items a {
         padding: 0.7rem 1.2rem;
         font-size: 0.95rem;
+    }
+
+    .title-container {
+        margin-top: -1rem;
+        padding: 0 0.5rem;
+    }
+
+    .center-content {
+        padding: 0 0.5rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+        padding: 0.3rem 1rem;
+        transform: translateY(-8px);
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .artist-name {
+        font-size: 1.8rem;
+        padding: 1rem;
+        width: 98%;
+    }
+    
+    .artist-name:before {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .artist-name:after {
+        border-width: 2px;
     }
 }
 
@@ -323,25 +450,203 @@ body {
 /* Only apply diagonal arrangement for screens below 375px */
 @media screen and (max-width: 374px) {
     .artist-name {
-        font-size: 2rem;
+        font-size: 1.6rem;
+        padding: 0.8rem;
+        width: 98%;
         line-height: 1.2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
     
-    .artist-name::before {
-        content: "ALL";
-        margin-right: 30%;
-        margin-bottom: -0.5rem;
+    .artist-name:before {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        margin-bottom: 0.4rem;
     }
-    
-    .artist-name::after {
-        content: "TOGETHER";
-        margin-left: 30%;
+
+    .artist-name:after {
+        border-width: 2px;
     }
 
     .artist-name span {
-        display: none;
+        display: block; /* Keep the text visible */
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+        transform: translateY(-6px);
+    }
+}
+
+/* Add these styles at the end of your existing CSS file */
+
+.streaming-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.streaming-button {
+    display: block;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: white;
+    border: 2px solid var(--primary-text);
+    color: var(--primary-text);
+}
+
+.streaming-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.streaming-button:active {
+    transform: translateY(0);
+}
+
+.spotify {
+    background: #1DB954;
+    border-color: #1DB954;
+    color: white;
+}
+
+.youtube-music {
+    background: #FF0000;
+    border-color: #FF0000;
+    color: white;
+}
+
+.apple-music {
+    background: #FB2D4D;
+    border-color: #FB2D4D;
+    color: white;
+}
+
+.deezer {
+    background: #00C7F2;
+    border-color: #00C7F2;
+    color: white;
+}
+
+.amazon-music {
+    background: #00A8E1;
+    border-color: #00A8E1;
+    color: white;
+}
+
+@media screen and (max-width: 480px) {
+    .streaming-buttons {
+        padding: 0 1rem;
+    }
+    
+    .streaming-button {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+.more-platforms {
+    background: #333;
+    border-color: #333;
+    color: white;
+}
+
+.platforms-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.platforms-modal.active {
+    display: flex;
+}
+
+.platforms-modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.platforms-modal-content h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.additional-platforms {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.platform-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.platform-column li {
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--primary-text);
+}
+
+.close-modal {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.8rem 2rem;
+    border: none;
+    background: #333;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: #444;
+    transform: translateY(-2px);
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .additional-platforms {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .platform-column li {
+        font-size: 1rem;
+        padding: 0.4rem 0;
     }
 }

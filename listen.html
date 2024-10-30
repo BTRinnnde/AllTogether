@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listen - ALL TOGETHER</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Listen to ALL TOGETHER on your favorite streaming platform">
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-bar"></div>
+        <nav class="burger-menu">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-items">
+                <a href="mission.html">Our Mission</a>
+                <a href="founder.html">The Founder</a>
+                <a href="future.html">The Future</a>
+            </div>
+        </nav>
+        <a href="index.html" class="header-title">ALL TOGETHER</a>
+    </div>
+
+    <div class="page-content">
+        <h2>Listen Now</h2>
+        <div class="streaming-buttons">
+            <a href="https://open.spotify.com/artist/5IZ63qOo0HoPI0clDX0mOi?si=G6_jQdZwSZ-t9E2hh86ApA" 
+               target="_blank" 
+               class="streaming-button spotify">
+                Listen on Spotify
+            </a>
+            <a href="https://music.youtube.com/channel/UCQMk7bHoC8xitQXCM9t4Usw?feature=shared" 
+               target="_blank" 
+               class="streaming-button youtube-music">
+                Listen on YouTube Music
+            </a>
+            <a href="https://music.apple.com/us/artist/all-together/1764047720" 
+               target="_blank" 
+               class="streaming-button apple-music">
+                Listen on Apple Music
+            </a>
+            <a href="https://www.deezer.com/en/artist/331816" 
+               target="_blank" 
+               class="streaming-button deezer">
+                Listen on Deezer
+            </a>
+            <a href="https://music.amazon.com/artists/B001QY4PEQ/all-together" 
+               target="_blank" 
+               class="streaming-button amazon-music">
+                Listen on Amazon Music
+            </a>
+            <a href="#" 
+               class="streaming-button more-platforms"
+               onclick="togglePlatformsList(event)">
+                More Platforms
+            </a>
+        </div>
+
+        <div class="platforms-modal" id="platformsList">
+            <div class="platforms-modal-content">
+                <h3>Also Available On</h3>
+                <div class="additional-platforms">
+                    <div class="platform-column">
+                        <ul>
+                            <li>Beatport</li>
+                            <li>Audiomack</li>
+                            <li>Instagram</li>
+                            <li>Audius</li>
+                            <li>Flo</li>
+                            <li>iHeartRadio</li>
+                            <li>Anghami</li>
+                            <li>Qobuz</li>
+                            <li>Gaana</li>
+                        </ul>
+                    </div>
+                    <div class="platform-column">
+                        <ul>
+                            <li>Pandora</li>
+                            <li>JioSaavn</li>
+                            <li>7digital</li>
+                            <li>Tidal</li>
+                            <li>TikTok</li>
+                            <li>Napster</li>
+                            <li>SoundCloud</li>
+                            <li>Shazam</li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="close-modal" onclick="togglePlatformsList(event)">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
