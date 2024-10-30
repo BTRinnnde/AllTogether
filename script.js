@@ -44,16 +44,29 @@ function navigateToPage(page) {
             const parser = new DOMParser();
             const newDoc = parser.parseFromString(html, 'text/html');
             
-            // Update the page content
-            document.querySelector('.page-content')?.remove();
-            document.querySelector('main')?.remove();
-            
+            // Update the main content
+            const oldContent = document.querySelector('.page-content') || document.querySelector('main');
             const newContent = newDoc.querySelector('.page-content') || newDoc.querySelector('main');
-            if (newContent) {
+            
+            if (oldContent && newContent) {
+                oldContent.replaceWith(newContent);
+            } else if (newContent) {
                 document.body.appendChild(newContent);
             }
+
+            // Ensure header title exists
+            const headerTitle = document.querySelector('.header-title');
+            if (!headerTitle) {
+                const newHeaderTitle = newDoc.querySelector('.header-title');
+                if (newHeaderTitle) {
+                    const headerContainer = document.querySelector('.header-container');
+                    if (headerContainer) {
+                        headerContainer.appendChild(newHeaderTitle.cloneNode(true));
+                    }
+                }
+            }
             
-            // Update the title
+            // Update the page title
             document.title = newDoc.title;
             
             // Update the URL without the .html extension
@@ -72,9 +85,36 @@ window.addEventListener('popstate', function() {
     navigateToPage(page + (page.endsWith('.html') ? '' : '.html'));
 });
 
-// Add this if you have the platforms modal functionality
+// Update the platforms modal functionality
 function togglePlatformsList(event) {
     event.preventDefault();
     const modal = document.getElementById('platformsList');
     modal?.classList.toggle('active');
+
+    // When opening the modal, add click listener with a slight delay
+    if (modal?.classList.contains('active')) {
+        setTimeout(() => {
+            document.addEventListener('click', handleModalOutsideClick);
+        }, 100);
+    } else {
+        document.removeEventListener('click', handleModalOutsideClick);
+    }
+}
+
+// New function to handle clicks outside the modal
+function handleModalOutsideClick(event) {
+    const modal = document.getElementById('platformsList');
+    const modalContent = modal?.querySelector('.platforms-modal-content');
+    const moreButton = document.querySelector('.more-platforms');
+    
+    // Check if click is outside modal content and not on menu items, header, or the "More Platforms" button
+    if (modal?.classList.contains('active') && 
+        !modalContent?.contains(event.target) && 
+        !event.target.closest('.menu-items') && 
+        !event.target.closest('.header-title') &&
+        !moreButton?.contains(event.target)) {
+        
+        modal.classList.remove('active');
+        document.removeEventListener('click', handleModalOutsideClick);
+    }
 }
