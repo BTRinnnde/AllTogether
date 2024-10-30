@@ -9,6 +9,22 @@
     --hover-bg: rgba(0, 0, 0, 0.05);
     --shadow-color: rgba(0, 0, 0, 0.08);
     --menu-shadow: rgba(0, 0, 0, 0.05);
+    --header-height: 70px;
+    --border-radius-lg: 20px;
+    --border-radius-md: 16px;
+    --border-radius-sm: 12px;
+    --border-radius-xs: 8px;
+    --transition-default: all 0.3s ease;
+    
+    --youtube-red: #FF0000;
+    --spotify-green: #1DB954;
+    --apple-pink: #FB2D4D;
+    --deezer-blue: #00C7F2;
+    --amazon-blue: #00A8E1;
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --z-header: 999;
+    --z-modal: 1000;
+    --z-menu: 1001;
 }
 
 body {
@@ -20,24 +36,16 @@ body {
 }
 
 /* Header and Navigation */
-.header-container {
+.header-container, .header-bar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 70px;
-    z-index: 1001;
+    height: var(--header-height);
+    z-index: var(--z-header);
+    background-color: white;
     width: 100%;
     display: block;
-}
-
-.header-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    z-index: 99;
 }
 
 .header-title {
@@ -50,7 +58,7 @@ body {
     color: var(--primary-text);
     letter-spacing: 2px;
     text-decoration: none;
-    z-index: 100;
+    z-index: var(--z-menu);
     white-space: nowrap;
     padding: 5px;
     border-radius: 8px;
@@ -64,7 +72,7 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 100;
+    z-index: var(--z-menu);
     padding: 5px;
     border-radius: 8px;
 }
@@ -122,7 +130,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    z-index: 101;
+    z-index: var(--z-menu);
 }
 
 .menu-items a {
@@ -130,7 +138,7 @@ body {
     text-decoration: none;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
-    transition: all 0.2s ease;
+    transition: var(--transition-default);
     font-size: 1rem;
     letter-spacing: 0.5px;
 }
@@ -174,7 +182,7 @@ body {
     align-items: center;
     padding: 2rem 3rem;
     border-radius: 20px;
-    transition: all 0.3s ease;
+    transition: var(--transition-default);
     background: white;
     box-shadow: 0 4px 20px var(--shadow-color);
     position: relative;
@@ -277,8 +285,8 @@ body {
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .artist-name {
-        font-size: 3rem;
-        padding: 1.5rem 2rem;
+        font-size: 2.2rem;
+        padding: 1.2rem 1.5rem;
         width: 90%;
         max-width: 400px;
     }
@@ -496,10 +504,13 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-default);
     background: white;
     border: 2px solid var(--primary-text);
     color: var(--primary-text);
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
 }
 
 .streaming-button:hover {
@@ -512,32 +523,32 @@ body {
 }
 
 .spotify {
-    background: #1DB954;
-    border-color: #1DB954;
+    background: var(--spotify-green);
+    border-color: var(--spotify-green);
     color: white;
 }
 
 .youtube-music {
-    background: #FF0000;
-    border-color: #FF0000;
+    background: var(--youtube-red);
+    border-color: var(--youtube-red);
     color: white;
 }
 
 .apple-music {
-    background: #FB2D4D;
-    border-color: #FB2D4D;
+    background: var(--apple-pink);
+    border-color: var(--apple-pink);
     color: white;
 }
 
 .deezer {
-    background: #00C7F2;
-    border-color: #00C7F2;
+    background: var(--deezer-blue);
+    border-color: var(--deezer-blue);
     color: white;
 }
 
 .amazon-music {
-    background: #00A8E1;
-    border-color: #00A8E1;
+    background: var(--amazon-blue);
+    border-color: var(--amazon-blue);
     color: white;
 }
 
@@ -572,7 +583,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: var(--z-modal);
     justify-content: center;
     align-items: center;
     pointer-events: none;
@@ -592,7 +603,7 @@ body {
     overflow-y: auto;
     position: relative;
     animation: modalFadeIn 0.3s ease;
-    z-index: 1000;
+    z-index: var(--z-modal);
     pointer-events: auto;
 }
 
@@ -664,7 +675,7 @@ body {
 /* Update modal styles */
 .platforms-modal {
     /* ... existing styles ... */
-    z-index: 1000;
+    z-index: var(--z-modal);
     pointer-events: none;
 }
 
@@ -676,29 +687,234 @@ body {
 /* Desktop styles (screens larger than 768px) */
 @media screen and (min-width: 769px) {
     .header-container {
-        z-index: 999; /* Below modal */
+        z-index: var(--z-header); /* Below modal */
     }
     
     .burger-menu {
-        z-index: 1001; /* Above modal */
+        z-index: var(--z-menu); /* Above modal */
     }
     
     .header-title {
-        z-index: 1001; /* Above modal */
+        z-index: var(--z-menu); /* Above modal */
     }
 }
 
 /* Mobile styles (screens 768px and below) */
 @media screen and (max-width: 768px) {
     .header-container {
-        z-index: 999; /* Below modal */
+        z-index: var(--z-header); /* Below modal */
     }
     
     .burger-menu {
-        z-index: 1001; /* Above modal */
+        z-index: var(--z-menu); /* Above modal */
     }
     
     .header-title {
-        z-index: 999; /* Below modal */
+        z-index: var(--z-header); /* Below modal */
+    }
+}
+
+.platform-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+/* For icons that might need contrast help */
+.youtube-music .platform-icon,
+.spotify .platform-icon,
+.tidal .platform-icon {
+    background: white;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+/* Combine header elements with same properties */
+.header-container, .header-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: var(--z-header);
+}
+
+/* Use the transition variable for elements that share the same transition */
+.menu-items a, 
+.streaming-button, 
+.artist-name {
+    transition: var(--transition-default);
+}
+
+/* Combine border-radius usage */
+.menu-icon,
+.header-title,
+.menu-items a {
+    border-radius: var(--border-radius-xs);
+}
+
+.menu-items,
+.streaming-button {
+    border-radius: var(--border-radius-sm);
+}
+
+.artist-name {
+    border-radius: var(--border-radius-lg);
+}
+
+/* Media Query Optimization */
+@media screen and (max-width: 768px) {
+    .artist-name {
+        font-size: 2.2rem;
+        padding: 1.2rem 1.5rem;
+    }
+    
+    .streaming-buttons {
+        padding: 0 1rem;
+    }
+    
+    .streaming-button {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Combine smaller screen breakpoints */
+@media screen and (max-width: 374px) {
+    .artist-name {
+        font-size: 1.6rem;
+        padding: 0.8rem;
+        width: 98%;
+        line-height: 1.2;
+    }
+    
+    .artist-name:before {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        margin-bottom: 0.4rem;
+    }
+}
+
+/* Platform button styles using variables */
+.streaming-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0;
+    border-radius: var(--border-radius-sm);
+    font-weight: bold;
+    color: white;
+}
+
+.youtube-music { background: var(--youtube-red); border-color: var(--youtube-red); }
+.spotify { background: var(--spotify-green); border-color: var(--spotify-green); }
+.apple-music { background: var(--apple-pink); border-color: var(--apple-pink); }
+.deezer { background: var(--deezer-blue); border-color: var(--deezer-blue); }
+.amazon-music { background: var(--amazon-blue); border-color: var(--amazon-blue); }
+.tidal { background: #000; border-color: #000; }
+.more-platforms { background: #333; border-color: #333; }
+
+/* Modal Optimization */
+.platforms-modal {
+    display: none;
+    position: fixed;
+    inset: 0; /* Replaces top/right/bottom/left: 0 */
+    background-color: var(--modal-bg);
+    z-index: var(--z-modal);
+}
+
+.platforms-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animation optimizations using hardware acceleration */
+.artist-name:hover,
+.streaming-button:hover,
+.menu-items a:hover {
+    transform: translateY(-2px);
+    will-change: transform;
+}
+
+/* Optimize icon styles */
+.platform-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+/* Add performance optimization for animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Add touch device optimization */
+@media (hover: none) {
+    .artist-name:hover,
+    .streaming-button:hover,
+    .menu-items a:hover {
+        transform: none;
+    }
+}
+
+/* Add this for desktop listen page layout */
+@media screen and (min-width: 769px) {
+    .listen-page .page-content {
+        height: 100vh;
+        padding-top: var(--header-height);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .listen-page .streaming-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        max-width: 350px;
+        padding: 0 1rem;
+    }
+
+    .listen-page h2 {
+        margin-bottom: 1rem;
+    }
+
+    .listen-page .streaming-button {
+        padding: 0.8rem 1.2rem;
+    }
+}
+
+/* Mobile listen page layout */
+@media screen and (max-width: 768px) {
+    .listen-page .header-container {
+        display: flex;
+    }
+
+    .listen-page .burger-menu {
+        display: block;
+    }
+
+    .listen-page .streaming-buttons {
+        gap: 0.4rem;
+        padding: 0 1rem;
+        margin-top: 1rem;
+    }
+
+    .listen-page .streaming-button {
+        padding: 8px 16px;
+    }
+
+    .listen-page .page-content {
+        padding-top: calc(var(--header-height) + 1rem);
     }
 }
