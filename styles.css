@@ -9,22 +9,6 @@
     --hover-bg: rgba(0, 0, 0, 0.05);
     --shadow-color: rgba(0, 0, 0, 0.08);
     --menu-shadow: rgba(0, 0, 0, 0.05);
-    --header-height: 70px;
-    --border-radius-lg: 20px;
-    --border-radius-md: 16px;
-    --border-radius-sm: 12px;
-    --border-radius-xs: 8px;
-    --transition-default: all 0.3s ease;
-    
-    --youtube-red: #FF0000;
-    --spotify-green: #1DB954;
-    --apple-pink: #FB2D4D;
-    --deezer-blue: #00C7F2;
-    --amazon-blue: #00A8E1;
-    --modal-bg: rgba(0, 0, 0, 0.5);
-    --z-header: 999;
-    --z-modal: 1000;
-    --z-menu: 1001;
 }
 
 body {
@@ -34,18 +18,25 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 }
-
 /* Header and Navigation */
-.header-container, .header-bar {
+.header-container {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--header-height);
-    z-index: var(--z-header);
-    background-color: white;
+    height: 70px;
+    z-index: 1001;
     width: 100%;
     display: block;
+}
+
+.header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    z-index: 99;
 }
 
 .header-title {
@@ -58,7 +49,7 @@ body {
     color: var(--primary-text);
     letter-spacing: 2px;
     text-decoration: none;
-    z-index: var(--z-menu);
+    z-index: 100;
     white-space: nowrap;
     padding: 5px;
     border-radius: 8px;
@@ -72,7 +63,7 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: var(--z-menu);
+    z-index: 100;
     padding: 5px;
     border-radius: 8px;
 }
@@ -130,7 +121,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    z-index: var(--z-menu);
+    z-index: 101;
 }
 
 .menu-items a {
@@ -138,7 +129,7 @@ body {
     text-decoration: none;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
-    transition: var(--transition-default);
+    transition: all 0.2s ease;
     font-size: 1rem;
     letter-spacing: 0.5px;
 }
@@ -182,7 +173,7 @@ body {
     align-items: center;
     padding: 2rem 3rem;
     border-radius: 20px;
-    transition: var(--transition-default);
+    transition: all 0.3s ease;
     background: white;
     box-shadow: 0 4px 20px var(--shadow-color);
     position: relative;
@@ -285,8 +276,8 @@ body {
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .artist-name {
-        font-size: 2.2rem;
-        padding: 1.2rem 1.5rem;
+        font-size: 3rem;
+        padding: 1.5rem 2rem;
         width: 90%;
         max-width: 400px;
     }
@@ -301,16 +292,31 @@ body {
     }
     
     .menu-items {
-        display: none;
+        position: fixed;
+        top: 55px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.98);
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px var(--menu-shadow);
+        display: flex;
         flex-direction: column;
         gap: 5px;
-        top: 65px;
-        padding: 0.8rem;
-        border: 1px solid var(--shadow-color);
+        z-index: 101;
+        
+        /* Initial state */
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: 
+            opacity 0.2s ease,
+            transform 0.2s ease;
     }
-    
+
     .menu-items.active {
-        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
     .page-content::before {
@@ -504,13 +510,10 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    transition: var(--transition-default);
+    transition: all 0.3s ease;
     background: white;
     border: 2px solid var(--primary-text);
     color: var(--primary-text);
-    display: flex;
-    align-items: center;
-    padding: 14px 20px;
 }
 
 .streaming-button:hover {
@@ -523,32 +526,32 @@ body {
 }
 
 .spotify {
-    background: var(--spotify-green);
-    border-color: var(--spotify-green);
+    background: #1DB954;
+    border-color: #1DB954;
     color: white;
 }
 
 .youtube-music {
-    background: var(--youtube-red);
-    border-color: var(--youtube-red);
+    background: #FF0000;
+    border-color: #FF0000;
     color: white;
 }
 
 .apple-music {
-    background: var(--apple-pink);
-    border-color: var(--apple-pink);
+    background: #FB2D4D;
+    border-color: #FB2D4D;
     color: white;
 }
 
 .deezer {
-    background: var(--deezer-blue);
-    border-color: var(--deezer-blue);
+    background: #00C7F2;
+    border-color: #00C7F2;
     color: white;
 }
 
 .amazon-music {
-    background: var(--amazon-blue);
-    border-color: var(--amazon-blue);
+    background: #00A8E1;
+    border-color: #00A8E1;
     color: white;
 }
 
@@ -583,7 +586,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: var(--z-modal);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
     pointer-events: none;
@@ -603,8 +606,9 @@ body {
     overflow-y: auto;
     position: relative;
     animation: modalFadeIn 0.3s ease;
-    z-index: var(--z-modal);
+    z-index: 1000;
     pointer-events: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .platforms-modal-content h3 {
@@ -675,7 +679,7 @@ body {
 /* Update modal styles */
 .platforms-modal {
     /* ... existing styles ... */
-    z-index: var(--z-modal);
+    z-index: 1000;
     pointer-events: none;
 }
 
@@ -687,234 +691,180 @@ body {
 /* Desktop styles (screens larger than 768px) */
 @media screen and (min-width: 769px) {
     .header-container {
-        z-index: var(--z-header); /* Below modal */
+        z-index: 999; /* Below modal */
     }
     
     .burger-menu {
-        z-index: var(--z-menu); /* Above modal */
+        z-index: 1001; /* Above modal */
     }
     
     .header-title {
-        z-index: var(--z-menu); /* Above modal */
+        z-index: 1001; /* Above modal */
     }
 }
 
 /* Mobile styles (screens 768px and below) */
 @media screen and (max-width: 768px) {
     .header-container {
-        z-index: var(--z-header); /* Below modal */
+        z-index: 999; /* Below modal */
     }
     
     .burger-menu {
-        z-index: var(--z-menu); /* Above modal */
+        z-index: 1001; /* Above modal */
     }
     
     .header-title {
-        z-index: var(--z-header); /* Below modal */
+        z-index: 999; /* Below modal */
     }
 }
 
-.platform-icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 12px;
-    object-fit: contain;
+/* Hide navigation on listen page */
+body:has(.streaming-buttons) .burger-menu,
+body:has(.streaming-buttons) .menu-items {
+    display: none !important;
 }
 
-/* For icons that might need contrast help */
-.youtube-music .platform-icon,
-.spotify .platform-icon,
-.tidal .platform-icon {
-    background: white;
-    border-radius: 50%;
-    padding: 2px;
-}
-
-/* Combine header elements with same properties */
-.header-container, .header-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-height);
-    z-index: var(--z-header);
-}
-
-/* Use the transition variable for elements that share the same transition */
-.menu-items a, 
-.streaming-button, 
-.artist-name {
-    transition: var(--transition-default);
-}
-
-/* Combine border-radius usage */
-.menu-icon,
-.header-title,
-.menu-items a {
-    border-radius: var(--border-radius-xs);
-}
-
-.menu-items,
-.streaming-button {
-    border-radius: var(--border-radius-sm);
-}
-
-.artist-name {
-    border-radius: var(--border-radius-lg);
-}
-
-/* Media Query Optimization */
+/* Mobile styles for platforms modal */
 @media screen and (max-width: 768px) {
-    .artist-name {
-        font-size: 2.2rem;
-        padding: 1.2rem 1.5rem;
-    }
-    
-    .streaming-buttons {
-        padding: 0 1rem;
-    }
-    
-    .streaming-button {
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
-    }
-}
-
-/* Combine smaller screen breakpoints */
-@media screen and (max-width: 374px) {
-    .artist-name {
-        font-size: 1.6rem;
-        padding: 0.8rem;
-        width: 98%;
-        line-height: 1.2;
-    }
-    
-    .artist-name:before {
-        font-size: 0.7rem;
-        letter-spacing: 1px;
-        margin-bottom: 0.4rem;
-    }
-}
-
-/* Platform button styles using variables */
-.streaming-button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 0.5rem 0;
-    border-radius: var(--border-radius-sm);
-    font-weight: bold;
-    color: white;
-}
-
-.youtube-music { background: var(--youtube-red); border-color: var(--youtube-red); }
-.spotify { background: var(--spotify-green); border-color: var(--spotify-green); }
-.apple-music { background: var(--apple-pink); border-color: var(--apple-pink); }
-.deezer { background: var(--deezer-blue); border-color: var(--deezer-blue); }
-.amazon-music { background: var(--amazon-blue); border-color: var(--amazon-blue); }
-.tidal { background: #000; border-color: #000; }
-.more-platforms { background: #333; border-color: #333; }
-
-/* Modal Optimization */
-.platforms-modal {
-    display: none;
-    position: fixed;
-    inset: 0; /* Replaces top/right/bottom/left: 0 */
-    background-color: var(--modal-bg);
-    z-index: var(--z-modal);
-}
-
-.platforms-modal.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Animation optimizations using hardware acceleration */
-.artist-name:hover,
-.streaming-button:hover,
-.menu-items a:hover {
-    transform: translateY(-2px);
-    will-change: transform;
-}
-
-/* Optimize icon styles */
-.platform-icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 12px;
-    object-fit: contain;
-}
-
-/* Add performance optimization for animations */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* Add touch device optimization */
-@media (hover: none) {
-    .artist-name:hover,
-    .streaming-button:hover,
-    .menu-items a:hover {
-        transform: none;
-    }
-}
-
-/* Add this for desktop listen page layout */
-@media screen and (min-width: 769px) {
-    .listen-page .page-content {
-        height: 100vh;
-        padding-top: var(--header-height);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+    .platforms-modal-content {
+        width: 80%;
+        max-height: 60vh; /* Slightly reduced from 70vh */
+        margin-top: -5vh;  /* Adjusted from -10vh */
+        padding: 1.5rem;
+        overflow-y: auto;
     }
 
-    .listen-page .streaming-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        max-width: 350px;
-        padding: 0 1rem;
+    .platform-column li {
+        font-size: 0.95rem; /* Slightly smaller text */
+        padding: 0.3rem 0;  /* Reduced padding between items */
     }
 
-    .listen-page h2 {
+    .platforms-modal-content h3 {
+        font-size: 1.3rem;  /* Slightly smaller heading */
         margin-bottom: 1rem;
     }
 
-    .listen-page .streaming-button {
-        padding: 0.8rem 1.2rem;
+    .close-modal {
+        margin-top: 1.5rem; /* Reduced top margin */
+        padding: 0.6rem 1.8rem; /* Slightly smaller button */
     }
 }
 
-/* Mobile listen page layout */
-@media screen and (max-width: 768px) {
-    .listen-page .header-container {
+/* Add these styles - specifically for desktop listen page */
+@media screen and (min-width: 769px) {
+    body:has(.streaming-buttons) .page-content {
+        min-height: 100vh;
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 90px;
     }
 
-    .listen-page .burger-menu {
-        display: block;
-    }
-
-    .listen-page .streaming-buttons {
-        gap: 0.4rem;
-        padding: 0 1rem;
-        margin-top: 1rem;
-    }
-
-    .listen-page .streaming-button {
-        padding: 8px 16px;
-    }
-
-    .listen-page .page-content {
-        padding-top: calc(var(--header-height) + 1rem);
+    body:has(.streaming-buttons) .streaming-buttons {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+        padding-right: 5px;
     }
 }
+
+/* Platform logo styles */
+.platform-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    vertical-align: middle;
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 4px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.streaming-button {
+    position: relative;
+    padding-left: 75px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    min-height: 56px;
+}
+
+/* Amazon Music specific adjustment for all screen sizes */
+.amazon-music .platform-logo {
+    height: 26px;
+    width: 42px;
+    padding: 3px 5px;
+    transform: translateY(-50%);
+    left: 22px;
+}
+
+/* Other platform-specific adjustments */
+.youtube-music .platform-logo,
+.spotify .platform-logo,
+.apple-music .platform-logo,
+.tidal .platform-logo,
+.deezer .platform-logo {
+    padding: 3px;
+}
+
+/* Mobile adjustments - keeping proportions consistent */
+@media screen and (max-width: 480px) {
+    .streaming-button {
+        padding-left: 65px;
+        font-size: 0.95rem;
+        min-height: 52px;
+    }
+    
+    .platform-logo {
+        height: 32px;
+        left: 20px;
+    }
+    
+    .amazon-music .platform-logo {
+        height: 26px; /* Keep the same proportion as desktop */
+        width: 42px;
+        left: 17px; /* Slightly adjusted for mobile */
+        padding: 3px 5px;
+    }
+}
+
+/* Keep all base styles the same, just update the Amazon-specific styles */
+
+/* Amazon Music specific adjustment */
+.amazon-music .platform-logo {
+    height: 36px; /* Same height as other logos */
+    width: 36px; /* Force square aspect ratio */
+    padding: 4px; /* Same padding as others */
+    left: 25px; /* Same left position as others */
+    display: flex; /* Enable flexible box */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.amazon-music .platform-logo img {
+    width: 100%; /* Fill the container width */
+    height: auto; /* Maintain aspect ratio */
+    transform: scale(1.2); /* Make logo slightly larger within container */
+    object-fit: contain; /* Ensure logo fits without distortion */
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 480px) {
+    .platform-logo {
+        height: 32px;
+        width: 32px;
+        left: 20px;
+    }
+    
+    .amazon-music .platform-logo {
+        height: 32px; /* Match other logos */
+        width: 32px;
+        left: 20px;
+    }
+}
+
