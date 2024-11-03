@@ -54,7 +54,7 @@ function navigateToPage(page) {
                 document.body.appendChild(newContent);
             }
 
-            // Ensure header title exists
+            // Handle header title
             const headerTitle = document.querySelector('.header-title');
             if (!headerTitle) {
                 const newHeaderTitle = newDoc.querySelector('.header-title');
@@ -66,18 +66,43 @@ function navigateToPage(page) {
                 }
             }
 
-            // Scroll to top of the page
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            // Handle footer
+            const oldFooter = document.querySelector('.site-footer');
+            const newFooter = newDoc.querySelector('.site-footer');
             
+            // Remove old footer if it exists
+            if (oldFooter) {
+                oldFooter.remove();
+            }
+            
+            // Add new footer if it exists in the new page
+            if (newFooter) {
+                document.body.insertBefore(newFooter.cloneNode(true), document.querySelector('script'));
+            }
+
             // Update the page title
             document.title = newDoc.title;
             
             // Update the URL without the .html extension
             const newPath = page.replace('.html', '');
             history.pushState({}, '', newPath);
+
+            // Scroll to top of the page
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // Handle both modals
+            ['legal', 'social'].forEach(modalType => {
+                const oldModal = document.getElementById(`${modalType}Modal`);
+                const newModal = newDoc.getElementById(`${modalType}Modal`);
+                
+                if (oldModal) oldModal.remove();
+                if (newModal) {
+                    document.body.insertBefore(newModal.cloneNode(true), document.querySelector('script'));
+                }
+            });
         })
         .catch(error => {
             console.error('Navigation error:', error);
@@ -131,5 +156,108 @@ function handleModalOutsideClick(event) {
         document.body.style.overflow = ''; // Restore scrolling
         streamingButtons.style.pointerEvents = ''; // Re-enable streaming buttons
         document.removeEventListener('click', handleModalOutsideClick);
+    }
+}
+
+function openLegalModal(type) {
+    event.preventDefault();
+    const modal = document.getElementById('legalModal');
+    const title = document.getElementById('legalTitle');
+    const content = document.getElementById('legalText');
+    
+    if (type === 'privacy') {
+        title.textContent = 'Privacy Policy';
+        content.innerHTML = `
+            <p>We do not collect any type of data through this website. The only data collection happens through the streaming platforms you choose to use.</p>
+            <p>By using our services, you agree to the privacy policies of the respective streaming platforms.</p>
+        `;
+    } else if (type === 'terms') {
+        title.textContent = 'Terms of Service';
+        content.innerHTML = `
+            <p>By using our services, you agree to these terms of service.</p>
+            <p>All Together does not support or tolerate fraudulent streaming activities, including the use of stream bots or any artificial means to inflate stream counts.</p>
+            <p>All Together is committed to transparency and ethical practices. We donate 100% of streaming revenue to meaningful causes.</p>
+            <p>The music and content provided through our services are subject to copyright and other intellectual property rights.</p>
+        `;
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Add click event listener for outside clicks
+    document.addEventListener('click', handleLegalModalOutsideClick);
+}
+
+function handleLegalModalOutsideClick(event) {
+    const modal = document.getElementById('legalModal');
+    const modalContent = modal?.querySelector('.legal-modal-content');
+    
+    if (modal?.classList.contains('active') && 
+        modalContent && 
+        !modalContent.contains(event.target) && 
+        !event.target.closest('a[onclick*="openLegalModal"]')) {
+        
+        toggleLegalModal(event);
+    }
+}
+
+function toggleLegalModal(event) {
+    if (event) event.preventDefault();
+    const modal = document.getElementById('legalModal');
+    if (!modal) return;
+    
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    document.removeEventListener('click', handleLegalModalOutsideClick);
+}
+
+// Update the escape key handler
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const legalModal = document.getElementById('legalModal');
+        const socialModal = document.getElementById('socialModal');
+        
+        if (legalModal?.classList.contains('active')) {
+            toggleLegalModal();
+        }
+        if (socialModal?.classList.contains('active')) {
+            toggleSocialModal();
+        }
+    }
+});
+
+// Add these new functions
+function openSocialModal(event) {
+    if (event) event.preventDefault();
+    const modal = document.getElementById('socialModal');
+    if (!modal) return;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        document.addEventListener('click', handleSocialModalOutsideClick);
+    }, 100);
+}
+
+function toggleSocialModal(event) {
+    if (event) event.preventDefault();
+    const modal = document.getElementById('socialModal');
+    if (!modal) return;
+    
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    document.removeEventListener('click', handleSocialModalOutsideClick);
+}
+
+function handleSocialModalOutsideClick(event) {
+    const modal = document.getElementById('socialModal');
+    const modalContent = modal?.querySelector('.legal-modal-content');
+    
+    if (modal?.classList.contains('active') && 
+        modalContent && 
+        !modalContent.contains(event.target) && 
+        !event.target.closest('a[onclick*="openSocialModal"]')) {
+        
+        toggleSocialModal(event);
     }
 }

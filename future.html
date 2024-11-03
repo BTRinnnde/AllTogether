@@ -44,5 +44,59 @@
     </div>
 
     <script src="script.js"></script>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Shortcuts</h4>
+                <a href="index.html">Home</a>
+                <a href="mission.html">Our Mission</a>
+                <a href="founder.html">The Founder</a>
+                <a href="future.html">The Future</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <a href="mailto:alltogetherofficial@aogo.no">Email</a>
+                <div class="social-links">
+                    <div class="social-column desktop-only">
+                        <a href="https://www.instagram.com/alltogetherofficial/" target="_blank">Instagram</a>
+                        <a href="https://www.tiktok.com/@all_together_official" target="_blank">TikTok</a>
+                    </div>
+                    <div class="mobile-only">
+                        <a href="#" onclick="openSocialModal(event)">Socials</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#" onclick="openLegalModal('privacy')">Privacy Policy</a>
+                <a href="#" onclick="openLegalModal('terms')">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 ALL TOGETHER - Music that helps</p>
+        </div>
+    </footer>
+
+    <div id="legalModal" class="legal-modal">
+        <div class="legal-modal-content">
+            <h3 id="legalTitle"></h3>
+            <div id="legalText"></div>
+            <button class="close-modal" onclick="toggleLegalModal(event)">Close</button>
+        </div>
+    </div>
+
+    <div id="socialModal" class="legal-modal">
+        <div class="legal-modal-content">
+            <h3>Social Media</h3>
+            <div class="social-modal-links">
+                <a href="https://www.instagram.com/alltogetherofficial/" target="_blank" class="social-modal-button">Instagram</a>
+                <a href="https://www.tiktok.com/@all_together_official" target="_blank" class="social-modal-button">TikTok</a>
+            </div>
+            <button class="close-modal" onclick="toggleSocialModal(event)">Close</button>
+        </div>
+    </div>
 </body>
 </html>
