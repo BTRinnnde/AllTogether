@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Money - ALL TOGETHER</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Track ALL TOGETHER's streaming earnings and their impact on meaningful causes.">
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-bar"></div>
+        <nav class="burger-menu">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-items">
+                <a href="mission.html">Our Mission</a>
+                <a href="founder.html">The Founder</a>
+                <a href="future.html">The Future</a>
+                <a href="money.html">The Money</a>
+            </div>
+        </nav>
+        <a href="index.html" class="header-title">ALL TOGETHER</a>
+    </div>
+
+    <div class="page-content">
+        <h2>The Money</h2>
+        <p>
+            Right now, streaming and earnings data is updated manually, but the goal is to automate this sooner or later. 
+            For now, I'll try to update this page once a week. It will show the total earnings, stream counts from some 
+            major platforms, and the total amount of money given away so far.
+        </p>
+        <p>
+            Every stream matters, and together, 
+            we're creating something meaningful.
+        </p>
+
+        <div class="stats-container">
+            <div class="stats-table">
+                <h3>Total Streams</h3>
+                <table>
+                    <tr>
+                        <td>Spotify</td>
+                        <td class="number">1 111</td>
+                    </tr>
+                    <tr>
+                        <td>Apple Music</td>
+                        <td class="number">??</td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Music</td>
+                        <td class="number">7</td>
+                    </tr>
+                    <tr>
+                        <td>YouTube Music</td>
+                        <td class="number">172 384</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="stats-table clickable" onclick="toggleMoneyDetailsModal(event)">
+                <h3>Money Made</h3>
+                <table>
+                    <tr>
+                        <td>Spotify</td>
+                        <td class="number">$4.4*</td>
+                    </tr>
+                    <tr>
+                        <td>Apple Music</td>
+                        <td class="number">??</td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Music</td>
+                        <td class="number">$0.0*</td>
+                    </tr>
+                    <tr>
+                        <td>YouTube Music</td>
+                        <td class="number">$1034.3*</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="stats-table donations">
+                <h3>Money Given Away</h3>
+                <table>
+                    <tr>
+                        <td>Total</td>
+                        <td class="number">$0.00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="more-info-container">
+            <button class="more-info-button" onclick="toggleMoreInfoModal(event)">More Info</button>
+        </div>
+
+        <div class="more-info-modal" id="moreInfoModal">
+            <div class="more-info-modal-content">
+                <h3>Pay Per Stream</h3>
+                <table class="platform-rates">
+                    <tr>
+                        <th>Platform</th>
+                        <th>Pay/Stream</th>
+                    </tr>
+                    <tr>
+                        <td>Spotify</td>
+                        <td>$0.004*</td>
+                    </tr>
+                    <tr>
+                        <td>Apple Music</td>
+                        <td>$0.008*</td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Music</td>
+                        <td>$0.004*</td>
+                    </tr>
+                    <tr>
+                        <td>YouTube Music</td>
+                        <td>$0.006*</td>
+                    </tr>
+                </table>
+                <p class="rate-note">* = This is an estimate, and are no guarantee.</p>
+                <p class="rate-note">?? = Data unavailable</p>
+                <p class="rate-note">With more experience and history these numbers will be more accurate.</p>
+                <p class="rate-note">The streamcount of youtube has shown to be unreliable.</p>
+                <button class="close-modal" onclick="toggleMoreInfoModal(event)">Close</button>
+            </div>
+        </div>
+
+        <div class="more-info-modal" id="moneyDetailsModal">
+            <div class="more-info-modal-content">
+                <h3>Money Details</h3>
+                <table class="platform-rates">
+                    <tr>
+                        <th>Platform</th>
+                        <th>Estimated</th>
+                        <th>Received</th>
+                    </tr>
+                    <tr>
+                        <td>Spotify</td>
+                        <td>$4.4</td>
+                        <td>$0.0</td>
+                    </tr>
+                    <tr>
+                        <td>Apple Music</td>
+                        <td>??</td>
+                        <td>$0.0</td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Music</td>
+                        <td>$0.0</td>
+                        <td>$0.0</td>
+                    </tr>
+                    <tr>
+                        <td>YouTube Music</td>
+                        <td>$1034.3</td>
+                        <td>$0.0</td>
+                    </tr>
+                </table>
+                <p class="rate-note">The estimated numbers are based on unpaid streams</p>
+                <p class="rate-note">Be aware of stores having a delay of 3 months before paying artists.</p>
+                <button class="close-modal" onclick="toggleMoneyDetailsModal(event)">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Shortcuts</h4>
+                <a href="index.html">Home</a>
+                <a href="mission.html">Our Mission</a>
+                <a href="founder.html">The Founder</a>
+                <a href="future.html">The Future</a>
+                <a href="money.html">The Money</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <a href="mailto:alltogetherofficial@aogo.no">Email</a>
+                <div class="social-links">
+                    <div class="social-column desktop-only">
+                        <a href="https://www.instagram.com/alltogetherofficial/" target="_blank">Instagram</a>
+                        <a href="https://www.tiktok.com/@all_together_official" target="_blank">TikTok</a>
+                    </div>
+                    <div class="mobile-only">
+                        <a href="#" onclick="openSocialModal(event)">Socials</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#" onclick="openLegalModal('privacy')">Privacy Policy</a>
+                <a href="#" onclick="openLegalModal('terms')">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 ALL TOGETHER - Music that helps</p>
+        </div>
+    </footer>
+
+    <div id="legalModal" class="legal-modal">
+        <div class="legal-modal-content">
+            <h3 id="legalTitle"></h3>
+            <div id="legalText"></div>
+            <button class="close-modal" onclick="toggleLegalModal(event)">Close</button>
+        </div>
+    </div>
+
+    <div id="socialModal" class="legal-modal">
+        <div class="legal-modal-content">
+            <h3>Social Media</h3>
+            <div class="social-modal-links">
+                <a href="https://www.instagram.com/alltogetherofficial/" target="_blank" class="social-modal-button">Instagram</a>
+                <a href="https://www.tiktok.com/@all_together_official" target="_blank" class="social-modal-button">TikTok</a>
+            </div>
+            <button class="close-modal" onclick="toggleSocialModal(event)">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
