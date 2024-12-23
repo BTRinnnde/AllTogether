@@ -44,6 +44,13 @@ function navigateToPage(page) {
             const parser = new DOMParser();
             const newDoc = parser.parseFromString(html, 'text/html');
             
+            // Update the URL first
+            const newPath = page.replace('.html', '');
+            history.pushState({}, '', newPath);
+
+            // Update the page title
+            document.title = newDoc.title;
+
             // Update the main content
             const oldContent = document.querySelector('.page-content') || document.querySelector('main');
             const newContent = newDoc.querySelector('.page-content') || newDoc.querySelector('main');
@@ -80,19 +87,6 @@ function navigateToPage(page) {
                 document.body.insertBefore(newFooter.cloneNode(true), document.querySelector('script'));
             }
 
-            // Update the page title
-            document.title = newDoc.title;
-            
-            // Update the URL without the .html extension
-            const newPath = page.replace('.html', '');
-            history.pushState({}, '', newPath);
-
-            // Scroll to top of the page
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-
             // Handle both modals
             ['legal', 'social'].forEach(modalType => {
                 const oldModal = document.getElementById(`${modalType}Modal`);
@@ -103,10 +97,15 @@ function navigateToPage(page) {
                     document.body.insertBefore(newModal.cloneNode(true), document.querySelector('script'));
                 }
             });
+
+            // Scroll to top AFTER content is loaded
+            requestAnimationFrame(() => {
+                window.scrollTo(0, 0);
+            });
         })
         .catch(error => {
             console.error('Navigation error:', error);
-            window.location.href = page; // Fallback to traditional navigation
+            window.location.href = page;
         });
 }
 

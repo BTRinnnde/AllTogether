@@ -758,17 +758,58 @@ body:has(.streaming-buttons) .menu-items {
 /* Add these styles - specifically for desktop listen page */
 @media screen and (min-width: 769px) {
     body:has(.streaming-buttons) .page-content {
-        min-height: 100vh;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 90px;
+        padding: 80px 2rem 2rem;
+        overflow: hidden;
+    }
+
+    body:has(.streaming-buttons) h2 {
+        margin-bottom: 1.5rem;
+        font-size: 2.3rem;
     }
 
     body:has(.streaming-buttons) .streaming-buttons {
-        max-height: calc(100vh - 200px);
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        width: 100%;
+        max-width: 340px;
+    }
+
+    /* Adjust streaming button layout */
+    body:has(.streaming-buttons) .streaming-button {
+        padding: 0.7rem 2rem 0.7rem 70px;
+        min-height: 40px;
+        font-size: 1rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Ensure platform logos stay properly positioned */
+    body:has(.streaming-buttons) .platform-logo {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 28px;
+        width: auto;
+    }
+
+    /* Specific adjustment for Amazon Music logo */
+    body:has(.streaming-buttons) .amazon-music .platform-logo {
+        height: 22px;
+    }
+}
+
+/* Keep mobile styles as they are */
+@media screen and (max-width: 768px) {
+    body:has(.streaming-buttons) .page-content {
+        padding-top: 90px;
         overflow-y: auto;
-        padding-right: 5px;
     }
 }
 
@@ -1374,5 +1415,67 @@ body:has(.center-content) .page-content {
 
 .stats-table.clickable:hover {
     background-color: rgba(0, 0, 0, 0.08); /* Darker gray color on hover */
+}
+
+.streaming-button.deezer {
+    background-color: #A768EE;  /* Purple color from Deezer heart logo */
+    border-color: #A768EE;
+    color: white;
+}
+
+.streaming-button.deezer:hover {
+    background-color: #9154d8; /* Slightly darker shade for hover effect */
+}
+
+/* Platform logo styles - update Amazon Music specific adjustments */
+.amazon-music .platform-logo {
+    height: 28px; /* Same as other logos */
+    width: 28px; /* Force square aspect ratio */
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+}
+
+/* Desktop specific adjustments */
+@media screen and (min-width: 769px) {
+    body:has(.streaming-buttons) .amazon-music .platform-logo {
+        height: 28px; /* Match other logos */
+        width: 28px; /* Keep square */
+        padding: 4px;
+        left: 18px;
+    }
+}
+
+/* Mobile specific adjustments */
+@media screen and (max-width: 768px) {
+    .amazon-music .platform-logo {
+        height: 36px; /* Match other logos on mobile */
+        width: 36px; /* Keep square */
+    }
+}
+
+.stats-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.last-updated {
+    position: absolute;
+    left: 1rem;
+    color: var(--primary-text);
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.more-info-container {
+    margin-top: 0;
 }
 
