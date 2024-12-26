@@ -29,6 +29,88 @@ document.addEventListener('DOMContentLoaded', function() {
             navigateToPage(page);
         });
     });
+
+    // 3D hover effect
+    const artistName = document.querySelector('.artist-name');
+    
+    if (artistName && window.innerWidth > 768) {
+        let isHovered = false;
+        let timeoutId = null;
+        
+        artistName.addEventListener('mouseenter', () => {
+            isHovered = true;
+            
+            // Clear any pending timeouts
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+            
+            artistName.style.animation = 'none';
+            
+            requestAnimationFrame(() => {
+                artistName.style.transform = `
+                    perspective(1000px)
+                    scale(1.1)
+                `;
+                artistName.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.15)';
+                
+                requestAnimationFrame(() => {
+                    artistName.style.transform = `
+                        perspective(1000px)
+                        scale(1.2)
+                    `;
+                    artistName.style.boxShadow = '0 40px 80px rgba(0, 0, 0, 0.2)';
+                });
+            });
+        });
+
+        artistName.addEventListener('mousemove', (e) => {
+            if (!isHovered) return;
+            
+            const rect = artistName.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / 7) * -1;
+            const rotateY = (x - centerX) / 18;
+
+            artistName.style.transform = `
+                perspective(1000px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.2)
+            `;
+        });
+
+        artistName.addEventListener('mouseleave', () => {
+            isHovered = false;
+            
+            // Clear any pending timeouts
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            
+            artistName.style.transform = `
+                perspective(1000px)
+                scale(1.1)
+            `;
+            artistName.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
+            
+            timeoutId = setTimeout(() => {
+                artistName.style.transform = '';
+                artistName.style.boxShadow = '';
+                
+                timeoutId = setTimeout(() => {
+                    artistName.style.animation = 'mainPulse 3s ease-in-out infinite';
+                    timeoutId = null;
+                }, 400);
+            }, 100);
+        });
+    }
 });
 
 function navigateToPage(page) {

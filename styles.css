@@ -160,6 +160,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    perspective: 1000px;
 }
 
 .artist-name {
@@ -173,11 +174,20 @@ body {
     align-items: center;
     padding: 2rem 3rem;
     border-radius: 20px;
-    transition: all 0.3s ease;
     background: white;
     box-shadow: 0 4px 20px var(--shadow-color);
     position: relative;
     z-index: 1;
+    transform-style: preserve-3d;
+    animation: mainPulse 3s ease-in-out infinite;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 3px solid var(--primary-text);
+}
+
+@keyframes mainPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
 }
 
 .artist-name:before {
@@ -190,42 +200,16 @@ body {
     letter-spacing: 4px;
 }
 
-.artist-name:after {
-    content: "";
+.artist-name::after {
+    content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px solid var(--primary-text);
-    border-radius: 20px;
-    top: 0;
-    left: 0;
-    animation: pulseOutline 2s infinite;
-    pointer-events: none;
-}
-
-@keyframes pulseOutline {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.02);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.artist-name:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px var(--shadow-color);
-    background: #f8f8f8;
-}
-
-.artist-name:hover {
-    opacity: 0.7;
+    top: -15px;
+    right: -15px;
+    bottom: -15px;
+    left: -15px;
+    cursor: pointer;
+    z-index: 2;
+    background: transparent;
 }
 
 .tagline {
@@ -238,8 +222,8 @@ body {
     padding: 0.5rem 1.5rem;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    transform: translateY(-10px);
+    transform: translateY(20px);
+    margin-top: 1rem;
 }
 
 /* Subpage Content */
@@ -1477,5 +1461,67 @@ body:has(.center-content) .page-content {
 
 .more-info-container {
     margin-top: 0;
+}
+
+/* Enhance clickable table styling */
+.stats-table.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Add mobile-specific styles */
+@media screen and (max-width: 768px) {
+    .stats-footer {
+        margin-top: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        position: static; /* Remove relative positioning on mobile */
+    }
+
+    .last-updated {
+        position: static; /* Remove absolute positioning on mobile */
+        order: 2; /* Move date below button */
+    }
+
+    .more-info-container {
+        order: 1; /* Move button above date */
+    }
+
+    .stats-table.clickable::after {
+        content: 'Tap for details →';
+        display: block;
+        text-align: center;
+        padding-top: 0.5rem;
+        color: var(--primary-text);
+        opacity: 0.7;
+        font-size: 0.8rem;
+    }
+
+    .stats-table.clickable:hover {
+        transform: translateY(-2px);
+    }
+
+    .stats-table.clickable:active {
+        transform: translateY(0);
+    }
+}
+
+/* Desktop-only hover effects */
+@media screen and (min-width: 769px) {
+    .artist-name:hover {
+        box-shadow: 0 15px 40px var(--shadow-color);
+    }
+}
+
+/* Desktop-only 3D effect */
+@media screen and (min-width: 769px) {
+    .title-container {
+        perspective: 1000px;
+    }
+
+    .artist-name {
+        transform-style: preserve-3d;
+    }
 }
 
