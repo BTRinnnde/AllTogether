@@ -297,16 +297,12 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const legalModal = document.getElementById('legalModal');
         const socialModal = document.getElementById('socialModal');
-        const moneyDetailsModal = document.getElementById('moneyDetailsModal');
         
         if (legalModal?.classList.contains('active')) {
             toggleLegalModal();
         }
         if (socialModal?.classList.contains('active')) {
             toggleSocialModal();
-        }
-        if (moneyDetailsModal?.classList.contains('active')) {
-            toggleMoneyDetailsModal(e);
         }
     }
 });
@@ -347,63 +343,4 @@ function handleSocialModalOutsideClick(event) {
     }
 }
 
-function toggleMoreInfoModal(event) {
-    if (event) event.preventDefault();
-    const modal = document.getElementById('moreInfoModal');
-    if (!modal) return;
-    
-    modal.classList.toggle('active');
-    document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : '';
-    
-    if (modal.classList.contains('active')) {
-        setTimeout(() => {
-            document.addEventListener('click', handleMoreInfoModalOutsideClick);
-        }, 100);
-    } else {
-        document.removeEventListener('click', handleMoreInfoModalOutsideClick);
-    }
-}
-
-function handleMoreInfoModalOutsideClick(event) {
-    const modal = document.getElementById('moreInfoModal');
-    const modalContent = modal?.querySelector('.more-info-modal-content');
-    
-    if (modal?.classList.contains('active') && 
-        modalContent && 
-        !modalContent.contains(event.target) && 
-        !event.target.closest('.more-info-button')) {
-        
-        toggleMoreInfoModal(event);
-    }
-}
-
-function toggleMoneyDetailsModal(event) {
-    event.preventDefault();
-    const modal = document.getElementById('moneyDetailsModal');
-    if (!modal) return;
-    
-    modal.classList.toggle('active');
-    document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : '';
-    
-    if (modal.classList.contains('active')) {
-        setTimeout(() => {
-            document.addEventListener('click', handleMoneyDetailsModalOutsideClick);
-        }, 100);
-    } else {
-        document.removeEventListener('click', handleMoneyDetailsModalOutsideClick);
-    }
-}
-
-function handleMoneyDetailsModalOutsideClick(event) {
-    const modal = document.getElementById('moneyDetailsModal');
-    const modalContent = modal?.querySelector('.more-info-modal-content');
-    const statsTable = document.querySelector('.stats-table.clickable');
-    
-    if (modal?.classList.contains('active') && 
-        modalContent && 
-        !modalContent.contains(event.target) && 
-        !statsTable.contains(event.target)) {
-        
-        toggleMoneyDetailsModal(event);
-    }
-}
+// Removed complex modal functions - no longer needed for simplified transparency page
