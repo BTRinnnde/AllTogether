@@ -180,6 +180,15 @@ function navigateToPage(page) {
                 }
             });
 
+            // Handle full receipt overlay
+            const oldFullReceiptOverlay = document.getElementById('fullReceiptOverlay');
+            const newFullReceiptOverlay = newDoc.getElementById('fullReceiptOverlay');
+            
+            if (oldFullReceiptOverlay) oldFullReceiptOverlay.remove();
+            if (newFullReceiptOverlay) {
+                document.body.insertBefore(newFullReceiptOverlay.cloneNode(true), document.querySelector('script'));
+            }
+
             // Scroll to top AFTER content is loaded
             requestAnimationFrame(() => {
                 window.scrollTo(0, 0);
@@ -297,12 +306,16 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         const legalModal = document.getElementById('legalModal');
         const socialModal = document.getElementById('socialModal');
+        const fullReceiptOverlay = document.getElementById('fullReceiptOverlay');
         
         if (legalModal?.classList.contains('active')) {
             toggleLegalModal();
         }
         if (socialModal?.classList.contains('active')) {
             toggleSocialModal();
+        }
+        if (fullReceiptOverlay?.classList.contains('active')) {
+            hideFullReceipt();
         }
     }
 });
@@ -343,4 +356,39 @@ function handleSocialModalOutsideClick(event) {
     }
 }
 
-// Removed complex modal functions - no longer needed for simplified transparency page
+// Receipts Functions
+function toggleReceipts() {
+    const container = document.getElementById('receiptsContainer');
+    const button = document.querySelector('.view-receipts-btn');
+    
+    if (container && button) {
+        if (container.style.display === 'none' || container.style.display === '') {
+            container.style.display = 'block';
+            button.textContent = 'Hide Receipts';
+        } else {
+            container.style.display = 'none';
+            button.textContent = 'View Receipts';
+        }
+    }
+}
+
+function showFullReceipt(imageElement) {
+    const overlay = document.getElementById('fullReceiptOverlay');
+    const fullImage = document.getElementById('fullReceiptImage');
+    
+    if (overlay && fullImage) {
+        fullImage.src = imageElement.src;
+        fullImage.alt = imageElement.alt;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function hideFullReceipt() {
+    const overlay = document.getElementById('fullReceiptOverlay');
+    
+    if (overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}

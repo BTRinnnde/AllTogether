@@ -52,19 +52,19 @@
         <div class="transparency-summary">
             <div class="summary-card">
                 <h3>Total Impact</h3>
-                <div class="big-number">242,854</div>
+                <div class="big-number">261,024</div>
                 <div class="big-label">streams</div>
             </div>
             
             <div class="summary-card">
                 <h3>Money Earned</h3>
-                <div class="big-number">~$207</div>
+                <div class="big-number">~$301</div>
                 <div class="big-label">verified</div>
             </div>
             
             <div class="summary-card highlight">
                 <h3>Money Donated</h3>
-                <div class="big-number">$10</div>
+                <div class="big-number">$210</div>
                 <div class="big-label">verified</div>
             </div>
         </div>
@@ -79,23 +79,23 @@
                 </tr>
                 <tr>
                     <td>Spotify</td>
-                    <td>14,216</td>
-                    <td>~$7</td>
+                    <td>15,594</td>
+                    <td>~$9</td>
                 </tr>
                 <tr>
                     <td>Apple Music</td>
-                    <td>17,200</td>
-                    <td>~$117</td>
+                    <td>19,230</td>
+                    <td>~$130</td>
                 </tr>
                 <tr>
                     <td>Amazon Music</td>
-                    <td>367</td>
-                    <td>~$1</td>
+                    <td>366</td>
+                    <td>~$4</td>
                 </tr>
                 <tr>
                     <td>YouTube Music</td>
-                    <td>211,071</td>
-                    <td>~$14</td>
+                    <td>225,834</td>
+                    <td>~$15</td>
                 </tr>
             </table>
             <p class="note">The amount of streams data is collected through various music platforms being connected to our artist name. The income is directly collected from our music distributer. </p>
@@ -105,6 +105,40 @@
             <h3>Donation Log</h3>
             <p class="section-intro">Every donation is documented below with proof of transfer:</p>
             
+            <div class="donation-entry">
+                <div class="donation-header">
+                    <span class="date">June 7, 2025</span>
+                    <span class="amount">$200.00</span>
+                </div>
+                <div class="donation-details">
+                    <strong>Recipients:</strong> Nova Ukraine, Save Ukraine, Razom Ukraine, DirectRelief<br>
+                    <strong>Purpose:</strong> Supporting humans in need affected by the war and crisis in Ukraine<br>
+                    <strong>Method:</strong> Online payment with credit card<br>
+                    <strong>Amount per organization:</strong> $50.00 each
+                </div>
+                <button class="view-receipts-btn" onclick="toggleReceipts()">View Receipts</button>
+                <div class="receipts-container" id="receiptsContainer" style="display: none;">
+                    <div class="receipts-grid">
+                        <div class="receipt-item">
+                            <h4>Nova Ukraine</h4>
+                            <img src="receipts/7thjune253.jpg" alt="Nova Ukraine donation receipt" class="receipt-image" onclick="showFullReceipt(this)">
+                        </div>
+                        <div class="receipt-item">
+                            <h4>Save Ukraine</h4>
+                            <img src="receipts/7thjune251.jpg" alt="Save Ukraine donation receipt" class="receipt-image" onclick="showFullReceipt(this)">
+                        </div>
+                        <div class="receipt-item">
+                            <h4>Razom Ukraine</h4>
+                            <img src="receipts/7thjune252.png" alt="Razom Ukraine donation receipt" class="receipt-image" onclick="showFullReceipt(this)">
+                        </div>
+                        <div class="receipt-item">
+                            <h4>DirectRelief</h4>
+                            <img src="receipts/7thjune250.jpg" alt="DirectRelief donation receipt" class="receipt-image" onclick="showFullReceipt(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="donation-entry">
                 <div class="donation-header">
                     <span class="date">January 1, 2025</span>
@@ -184,6 +218,10 @@
             </div>
             <button class="close-modal" onclick="toggleSocialModal(event)">Close</button>
         </div>
+    </div>
+
+    <div id="fullReceiptOverlay" class="full-receipt-overlay" onclick="hideFullReceipt()">
+        <img id="fullReceiptImage" src="" alt="Full size receipt" class="full-receipt-image">
     </div>
 
     <script src="script.js"></script>
